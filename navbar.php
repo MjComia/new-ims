@@ -13,13 +13,13 @@
           <a class="nav-link text-light" href="transaction.php">Transactions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Products</a>
+          <a class="nav-link text-light" href="product.php">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Suppliers</a>
+          <a class="nav-link text-light" href="supplier.php">Suppliers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Stock</a>
+          <a class="nav-link text-light" href="stock.php">Stock</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>

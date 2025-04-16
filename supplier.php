@@ -25,24 +25,22 @@ if ($conn){
 <table id="myTable" class="display">
         <thead>
             <tr>
-                <th>Product ID</th>
-                <th>Brand Model</th>
                 <th>Supplier ID</th>
-                <th>Sales</th>
+                <th>Supplier Name</th>
+                <th>Branch Address</th>
 
             </tr>
         </thead>
         <tbody>
 <?php 
-    $query = "SELECT product_id, brand_model, supplier_id,  sales FROM product_table";
+    $query = "SELECT supplier_id, supplier_name, branch_address FROM suppliers_table";
     $result = $conn->query($query);
     if($result->num_rows > 0 ){
       while($row = $result->fetch_assoc()){
         echo "<tr>";
-        echo "<td>" .  htmlspecialchars($row['product_id']). "</td>";
-        echo "<td>" .  htmlspecialchars($row['brand_model']). "</td>";
         echo "<td>" .  htmlspecialchars($row['supplier_id']). "</td>";
-        echo "<td>" .  htmlspecialchars($row['sales']). "</td>";
+        echo "<td>" .  htmlspecialchars($row['supplier_name']). "</td>";
+        echo "<td>" .  htmlspecialchars($row['branch_address']). "</td>";
       }
     }else {
       echo "<tr> <td colspan = '6'>No data found </td> </tr>";
