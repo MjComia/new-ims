@@ -49,7 +49,7 @@ if ($conn){
         echo "<td>" .  htmlspecialchars($row['contact_number']). "</td>";
         echo "<td>" .  htmlspecialchars($row['isle_number']) . "</td>";
         echo "<td>" .  htmlspecialchars($row['shelf']). "</td>";
-        echo "<td> <button>Edit</button><button>Edit</button> </td>";
+        echo "<td> <button class = 'edit-button'>Edit</button><button>Edit</button> </td>";
       }
     }else {
       echo "<tr> <td colspan = '6'>No data found </td> </tr>";
@@ -61,6 +61,8 @@ if ($conn){
     </table>
 
 
+    
+<script src = "js-files/functions.js"> </script>
 <!-- jQuery -->
 <script src="lib/jquery/jquery-3.7.1.min.js"></script>
 <!-- DataTables -->
