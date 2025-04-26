@@ -34,7 +34,9 @@ if ($conn){
                 <th>Isle Number</th>
                 <th>Shelf Number</th>
                 <th>Actions</th>
+                
             </tr>
+            
         </thead>
         <tbody>
 <?php 
@@ -49,7 +51,7 @@ if ($conn){
         echo "<td>" .  htmlspecialchars($row['contact_number']). "</td>";
         echo "<td>" .  htmlspecialchars($row['isle_number']) . "</td>";
         echo "<td>" .  htmlspecialchars($row['shelf']). "</td>";
-        echo "<td> <button class = 'edit-button'>Edit</button><button>Edit</button> </td>";
+        echo "<td> <button class='edit-button' onclick = 'edit();'>Edit</button> </td>";
       }
     }else {
       echo "<tr> <td colspan = '6'>No data found </td> </tr>";
@@ -61,9 +63,9 @@ if ($conn){
     </table>
 
 
-    
-<script src = "js-files/functions.js"> </script>
+
 <!-- jQuery -->
+</script>
 <script src="lib/jquery/jquery-3.7.1.min.js"></script>
 <!-- DataTables -->
 <script src="lib/datatables/dataTables.js"></script>
@@ -71,6 +73,7 @@ if ($conn){
 <script>
   $(document).ready(function () {
     $('#myTable').DataTable(); // Activate DataTable
+
   });
 </script>
 <?php include "footer.php"; ?>
