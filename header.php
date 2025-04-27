@@ -105,11 +105,5 @@
       </a>
     </div>
   </nav>
-  <div class="modal-dialog modal-dialog-centered">
- hi
-</div>
 
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-hello
-</div>
-
+<!-- Ali wag mo lagyan ng pang end ng head at html tag dito kasi nasa footer yon. TNXXXX -->
