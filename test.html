@@ -90,6 +90,22 @@
     </div>
   </div>
 </div>
+
+
+
+<form>
+  <div class="mb-3">
+    <label for="productSelect" class="form-label">Select a Product</label>
+    <select class="form-select" id="productSelect" name="product">
+      <option selected disabled>Choose a product...</option>
+      <option value="101">Yamaha Mio i125</option>
+      <option value="102">Honda Click 125i</option>
+      <option value="103">Kawasaki Barako II</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
     <script>
       $(document).ready(function () {
         $('#myTable').DataTable(); // Activate DataTable

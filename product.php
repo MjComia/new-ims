@@ -27,6 +27,7 @@ if ($conn){
             <tr>
                 <th>Product ID</th>
                 <th>Brand Model</th>
+                <th>Price</th>
                 <th>Supplier ID</th>
                 <th>Sales</th>
 
@@ -34,13 +35,14 @@ if ($conn){
         </thead>
         <tbody>
 <?php 
-    $query = "SELECT product_id, brand_model, supplier_id,  sales FROM product_table";
+    $query = "SELECT product_id, brand_model, price, supplier_id,  sales FROM product_table";
     $result = $conn->query($query);
     if($result->num_rows > 0 ){
       while($row = $result->fetch_assoc()){
         echo "<tr>";
         echo "<td>" .  htmlspecialchars($row['product_id']). "</td>";
         echo "<td>" .  htmlspecialchars($row['brand_model']). "</td>";
+        echo "<td>" .  htmlspecialchars($row['price']). "</td>";
         echo "<td>" .  htmlspecialchars($row['supplier_id']). "</td>";
         echo "<td>" .  htmlspecialchars($row['sales']). "</td>";
       }
