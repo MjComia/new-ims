@@ -108,6 +108,22 @@
           </div>
           </div>
 
+          <div class="mb-3">
+    <label for="productSelect" class="form-label">Select a Product</label>
+    <select class="form-select" id="productSelect" name="product">
+    <option selected disabled>Choose a product...</option>
+<?php 
+    $query = "SELECT product_id, brand_model FROM product_table";
+    $result = $conn->query($query);
+    if($result->num_rows > 0 ){
+      while($row = $result->fetch_assoc()){
+        echo "<option value = '" . htmlspecialchars($row['product_id']) . "'>" . htmlspecialchars($row['brand_model']) . "</option>";
+      }
+    }
+?>
+    </select>
+  </div>
+
         </form>
       </div>
       <div class="modal-footer">
