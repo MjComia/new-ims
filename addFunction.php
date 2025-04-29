@@ -108,16 +108,33 @@
           </div>
           </div>
 
-          <div class="mb-3">
-    <label for="productSelect" class="form-label">Select a Product</label>
+          <div class="row mb-3">
+    <label for="productSelect" class="form-label">Select a Brand Model</label>
     <select class="form-select" id="productSelect" name="product">
     <option selected disabled>Choose a product...</option>
 <?php 
-    $query = "SELECT product_id, brand_model FROM product_table";
+    $query = "SELECT product_id, brand_model, supplier_id FROM product_table";
     $result = $conn->query($query);
     if($result->num_rows > 0 ){
       while($row = $result->fetch_assoc()){
         echo "<option value = '" . htmlspecialchars($row['product_id']) . "'>" . htmlspecialchars($row['brand_model']) . "</option>";
+      }
+    }
+
+  echo "  </select>
+  </div>
+
+  
+  <div class='row mb-3'>
+    <label for='productSelect' class='form-label'>Select a Supplier</label>
+    <select class='form-select' id='supplierSelect' name='product'>
+    <option selected disabled>Choose a supplier...</option>";
+
+    $query = "SELECT supplier_id, supplier_name FROM suppliers_table";
+    $result = $conn->query($query);
+    if($result->num_rows > 0 ){
+      while($row = $result->fetch_assoc()){
+        echo "<option value = '" . htmlspecialchars($row['supplier_id']) . "'>" . htmlspecialchars($row['supplier_name']) . "</option>";
       }
     }
 ?>
@@ -132,3 +149,15 @@
     </div>
   </div>
 </div>
+
+<script>
+    // JavaScript to handle the change event
+    document.getElementById('productSelect').addEventListener('change', function () {
+        const selectedValue = this.value; // Get the selected value
+        const selectedText = this.options[this.selectedIndex].text; // Get the selected text
+        console.log('Selected Value:', selectedValue);
+        console.log('Selected Text:', selectedText);
+
+        // You can perform additional actions here, such as sending the data to the server via AJAX
+    });
+</script>
