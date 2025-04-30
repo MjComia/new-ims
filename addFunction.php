@@ -8,7 +8,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post">
+        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "POST">
           <div class="row align-items-center p-2">
           <label class = "col-4 col-form-label" for = "customer_name" >Customer name: </label> 
           <div class="col-8">
@@ -19,25 +19,25 @@
           <div class="row align-items-center p-2">
           <label class = "col-4 col-form-label" for = "customer_address" >Address: </label> 
           <div class="col-8">
-             <input type="text" name="customer_name" id="customer_address" class="form-control" required>  
+             <input type="text" name="address" id="customer_address" class="form-control" required>  
           </div>
           </div>
 
           <div class="row align-items-center p-2">
           <label class = "col-4 col-form-label" for = "customer_contactNumber" >Contact Number: </label> 
           <div class="col-8">
-             <input type="text" name="customer_name" id="customer_contactNumber" class="form-control" required>  
+             <input type="text" name="contact_number" id="customer_contactNumber" class="form-control" required>  
           </div>
           </div>
 
           <div class="row align-items-center p-2">
           <label class = "col-3 col-form-label" for = "customer_isle" >Isle Number: </label> 
           <div class="col-3">
-             <input type="text" name="customer_name" id="customer_isle" class="form-control" required>  
+             <input type="text" name="isle_number" id="customer_isle" class="form-control" required>  
           </div>
           <label class = "col-3 col-form-label" for = "customer_shelf" >Shelf Number: </label> 
           <div class="col-3">
-             <input type="text" name="customer_name" id="customer_shelf" class="form-control" required>  
+             <input type="text" name="shelf_number" id="customer_shelf" class="form-control" required>  
           </div>
           </div>
           
@@ -68,78 +68,71 @@
           <div class="row align-items-center p-2">
           <label class = "col-4 col-form-label" for = "add_customer_name" >Customer name: </label> 
           <div class="col-8">
-             <input type="text" name="customer_name" id="add_customer_name" class="form-control" required>  
+             <input type="text" name="add_name" id="add_customer_name" class="form-control" required>  
           </div>
           </div>
 
           <div class="row align-items-center p-2">
           <label class = "col-4 col-form-label" for = "add_customer_address" >Address: </label> 
           <div class="col-8">
-             <input type="text" name="customer_name" id="add_customer_address" class="form-control" required>  
+             <input type="text" name="add_address" id="add_customer_address" class="form-control" required>  
           </div>
           </div>
 
           <div class="row align-items-center p-2">
           <label class = "col-4 col-form-label" for = "add_customer_contact" >Contact number: </label> 
           <div class="col-8">
-             <input type="text" name="customer_name" id="add_customer_contact" class="form-control" required>  
+             <input type="text" name="add_contact_number" id="add_customer_contact" class="form-control" required>  
           </div>
           </div>
           
           <div class="row align-items-center p-2">
           <label class = "col-3 col-form-label" for = "add_customer_isle" >Isle Number: </label> 
           <div class="col-3">
-             <input type="text" name="customer_name" id="add_customer_isle" class="form-control" required>  
+             <input type="text" name="add_isle" id="add_customer_isle" class="form-control" required>  
           </div>
           <label class = "col-3 col-form-label" for = "add_customer_shelf" >Shelf Number: </label> 
           <div class="col-3">
-             <input type="text" name="customer_name" id="add_customer_shelf" class="form-control" required>  
+             <input type="text" name="add_shelf" id="add_customer_shelf" class="form-control" required>  
           </div>
           </div>
 
         <!-- Product Info  -->
 
-          <div class="row align-items-center p-2">
-          <label class = "col-4 col-form-label" for = "add_customer_contact" >Brand Model: </label> 
-          <div class="col-8">
-           <?php 
-           $query = "SELECT brand_model FROM product_table";
-           ?>
-          </div>
-          </div>
 
-          <div class="row mb-3">
+
+  <div class="row mb-3 col-10">
     <label for="productSelect" class="form-label">Select a Brand Model</label>
     <select class="form-select" id="productSelect" name="product">
     <option selected disabled>Choose a product...</option>
+
 <?php 
+
     $query = "SELECT product_id, brand_model, supplier_id FROM product_table";
     $result = $conn->query($query);
     if($result->num_rows > 0 ){
       while($row = $result->fetch_assoc()){
-        echo "<option value = '" . htmlspecialchars($row['product_id']) . "'>" . htmlspecialchars($row['brand_model']) . "</option>";
+        echo "<option name = 'add_brand' onclick = 'select();'  value='" . htmlspecialchars($row['supplier_id']) . "' data-supplier-id='" . htmlspecialchars($row['supplier_id']) . "'>" 
+        . htmlspecialchars($row['brand_model']) .  "</option>";
       }
     }
+  ?>
+   </select>
+   <div class="row align-items-center p-2">
+          <label class = "col-4 col-form-label" for = "add_quantity" >Quantity: </label> 
+          <div class="col-8">
+             <input type="number" name="add_quantity" id="add_quantity" class="form-control" required>  
+          </div>
+          </div>
 
-  echo "  </select>
-  </div>
-
+  <div class="row align-items-center p-2">
+      <label class = "col-4 col-form-label" for = "add_date" >Date: </label> 
+        <div class="col-8">
+             <input type="date" name="add_date" id="add_date" class="form-control" required>  
+        </div>
+        </div>
   
-  <div class='row mb-3'>
-    <label for='productSelect' class='form-label'>Select a Supplier</label>
-    <select class='form-select' id='supplierSelect' name='product'>
-    <option selected disabled>Choose a supplier...</option>";
 
-    $query = "SELECT supplier_id, supplier_name FROM suppliers_table";
-    $result = $conn->query($query);
-    if($result->num_rows > 0 ){
-      while($row = $result->fetch_assoc()){
-        echo "<option value = '" . htmlspecialchars($row['supplier_id']) . "'>" . htmlspecialchars($row['supplier_name']) . "</option>";
-      }
-    }
-?>
-    </select>
-  </div>
 
         </form>
       </div>
@@ -151,13 +144,74 @@
 </div>
 
 <script>
+    let val = null; // Variable to store the selected value
     // JavaScript to handle the change event
     document.getElementById('productSelect').addEventListener('change', function () {
         const selectedValue = this.value; // Get the selected value
         const selectedText = this.options[this.selectedIndex].text; // Get the selected text
         console.log('Selected Value:', selectedValue);
         console.log('Selected Text:', selectedText);
-
         // You can perform additional actions here, such as sending the data to the server via AJAX
+
+      
     });
+
 </script>
+
+
+<?php 
+if($SERVER["REQUEST_METHOD"] == "POST"){
+  $customer_name = $_POST['add_name'];//
+  $customer_address = $_POST['add_address'];//
+  $customer_contactNumber = $_POST['add_contact_number'];//
+  $customer_isle = $_POST['add_isle'];//
+  $customer_shelf = $_POST['add_shelf'];//
+  $brand_id = $_POST['add_brand'];
+  $quantity = $_POST['add_quantity'];
+  $date = $_POST['add_date'];
+
+//EDIT NALANG UNG SA PRODUCT TAS KUNIN UNG PRICE SHIT SA
+
+$query = "SELECT supplier_id, price FROM product_table";
+ $result = $conn->query($query);
+
+ if($result->num_rows>0){
+  while($row = $result->fetch_assoc()){
+    if($brand_id == $row['supplier_id']){
+      $supplier_id = $row['supplier_id'];
+      break;
+    }
+  }
+ }
+
+
+$query = "SELECT supplier_name, supplier_id FROM suppliers_table";
+$result = $conn->query($query);
+
+if($result->num_rows>0){
+  while($row = $result->fetch_assoc()){
+    if($supplier_id == $row['supplier_id']){
+      $supplier_name = $row['supplier_name'];
+      break;
+    }
+  }
+}
+
+
+  // Prepare and bind
+  $stmt = $conn->prepare("INSERT INTO customer_table (customer_name, address, contact_number, isle_number, shelf) VALUES (?, ?, ?, ?, ?)");
+  $stmt->bind_param("sssii", $customer_name, $customer_address, $customer_contactNumber, $customer_isle, $customer_shelf);
+
+  // Execute the statement
+  if ($stmt->execute()) {
+      echo "New record created successfully";
+  } else {
+      echo "Error: " . $stmt->error;
+  }
+
+  // Close the statement and connection
+  $stmt->close();
+  $conn->close();
+}
+
+?>
