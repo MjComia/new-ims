@@ -112,7 +112,7 @@
     $result = $conn->query($query);
     if($result->num_rows > 0 ){
       while($row = $result->fetch_assoc()){
-        echo "<option name = 'add_brand' onclick = 'select();'  value='" . htmlspecialchars($row['supplier_id']) . "' data-supplier-id='" . htmlspecialchars($row['supplier_id']) . "'>" 
+        echo "<option value='" . htmlspecialchars($row['product_id']) . "' data-supplier-id='" . htmlspecialchars($row['supplier_id']) . "'>" 
         . htmlspecialchars($row['brand_model']) .  "</option>";
       }
     }
@@ -133,7 +133,7 @@
         </div>
   
 
-
+    <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -160,29 +160,32 @@
 
 
 <?php 
-if($SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
   $customer_name = $_POST['add_name'];//
   $customer_address = $_POST['add_address'];//
   $customer_contactNumber = $_POST['add_contact_number'];//
   $customer_isle = $_POST['add_isle'];//
   $customer_shelf = $_POST['add_shelf'];//
-  $brand_id = $_POST['add_brand'];
+ // $brand_id = $_POST['product'];
+
+  $product_id = $_POST['product'];
   $quantity = $_POST['add_quantity'];
   $date = $_POST['add_date'];
-
+  
 //EDIT NALANG UNG SA PRODUCT TAS KUNIN UNG PRICE SHIT SA
-
+// customer ID makukuha na through ->insert_i, ung product_id naman ganon din
 $query = "SELECT supplier_id, price FROM product_table";
  $result = $conn->query($query);
 
- if($result->num_rows>0){
-  while($row = $result->fetch_assoc()){
-    if($brand_id == $row['supplier_id']){
-      $supplier_id = $row['supplier_id'];
-      break;
-    }
-  }
- }
+//  if($result->num_rows>0){
+//   while($row = $result->fetch_assoc()){
+//     if($brand_id == $row['supplier_id']){
+//       $total_price = $row['price'] * $quantity;
+//       break;
+//     }
+//   }
+//  }
+
 
 
 $query = "SELECT supplier_name, supplier_id FROM suppliers_table";
@@ -191,7 +194,7 @@ $result = $conn->query($query);
 if($result->num_rows>0){
   while($row = $result->fetch_assoc()){
     if($supplier_id == $row['supplier_id']){
-      $supplier_name = $row['supplier_name'];
+      $supplier_name = $row['supplier_name']; // PANG PROMPT LANG
       break;
     }
   }
@@ -204,14 +207,42 @@ if($result->num_rows>0){
 
   // Execute the statement
   if ($stmt->execute()) {
+    $customer_id = $stmt->insert_id; // Get the last inserted customer ID
       echo "New record created successfully";
+      $stmt->close();
   } else {
       echo "Error: " . $stmt->error;
   }
-
-  // Close the statement and connection
   $stmt->close();
+  $stmt = $conn->prepare("");
+
+$stmt = $conn->prepare("SELECT price FROM product_table WHERE product_id = ?");
+$stmt->bind_param("i", $product_id);
+$stmt->execute();
+$stmt->bind_result($price);
+$stmt->fetch();
+$stmt->close();
+
+$total_price = $price * $quantity;
+
+$stmt = $conn->prepare("INSERT INTO transactions_table (customer_id, product_id, quantity, purchase_date, total_price) VALUES (?,?,?,?,?)");
+$stmt->bind_param("iiisd", $customer_id, $product_id, $quantity, $date, $total_price);
+
+if ($stmt->execute()) {
+  echo "Transaction recorded successfully.";
+} else {
+  echo "Error inserting transaction: " . $stmt->error;
+}
+$stmt->close();
+
   $conn->close();
 }
 
 ?>
+<script>
+  document.querySelector('form').addEventListener('submit', function (e) {
+    // Close the modal after form submission
+    const modal = bootstrap.Modal.getInstance(document.getElementById('addCustomer'));
+    modal.hide();
+  });
+</script>
