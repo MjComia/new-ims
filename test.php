@@ -150,6 +150,11 @@
 </script>
 
 <?php 
+// Start the session if not already started
+if (!isset($_SESSION)) {
+  session_start();
+}
+
 // Check if the form has been submitted
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST['form_type'] == "add_customer"){
   // Get customer data from form
@@ -190,9 +195,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST[
       // Calculate total price
       $total_price = $price * $quantity;
       
+      // Format the date correctly for MySQL datetime
+      $formatted_date = date('Y-m-d H:i:s', strtotime($date));
+      
       // Insert transaction data
       $stmt = $conn->prepare("INSERT INTO transactions_table (customer_id, product_id, quantity, total_price, purchase_date) VALUES (?, ?, ?, ?, ?)");
-      $stmt->bind_param("iiids", $customer_id, $product_id, $quantity, $total_price, $date);
+      $stmt->bind_param("iiids", $customer_id, $product_id, $quantity, $total_price, $formatted_date);
       
       if (!$stmt->execute()) {
         throw new Exception("Error inserting transaction: " . $stmt->error);
@@ -205,7 +213,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST[
       // Display success message
       echo "<div class='alert alert-success'>Customer and transaction added successfully!</div>";
       
-      // Redirect to prevent form resubmission
+      // Set success message in session and redirect to prevent form resubmission
+      $_SESSION['success_message'] = "Customer and transaction added successfully!";
+      
       echo "<script>
         // Redirect after showing message
         setTimeout(function() {
@@ -224,78 +234,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST[
   }
 }
 ?>
-
-
-
-// $query = "SELECT supplier_id, price FROM product_table";
-//  $result = $conn->query($query);
-
-// //  if($result->num_rows>0){
-// //   while($row = $result->fetch_assoc()){
-// //     if($brand_id == $row['supplier_id']){
-// //       $total_price = $row['price'] * $quantity;
-// //       break;
-// //     }
-// //   }
-// //  }
-
-
-
-// $query = "SELECT supplier_name, supplier_id FROM suppliers_table";
-// $result = $conn->query($query);
-
-// if($result->num_rows>0){
-//   while($row = $result->fetch_assoc()){
-//     if($supplier_id == $row['supplier_id']){
-//       $supplier_name = $row['supplier_name']; // PANG PROMPT LANG
-//       break;
-//     }
-//   }
-// }
-
-
-//   // Prepare and bind
-//   $stmt = $conn->prepare("INSERT INTO customer_table (customer_name, address, contact_number, isle_number, shelf) VALUES (?, ?, ?, ?, ?)");
-//   $stmt->bind_param("sssii", $customer_name, $customer_address, $customer_contactNumber, $customer_isle, $customer_shelf);
-
-//   // Execute the statement
-//   if ($stmt->execute()) {
-//     $customer_id = $stmt->insert_id; // Get the last inserted customer ID
-//       echo "New record created successfully";
-//       $stmt->close();
-//   } else {
-//       echo "Error: " . $stmt->error;
-//   }
-//   $stmt->close();
-//   $stmt = $conn->prepare("");
-
-// $stmt = $conn->prepare("SELECT price FROM product_table WHERE product_id = ?");
-// $stmt->bind_param("i", $product_id);
-// $stmt->execute();
-// $stmt->bind_result($price);
-// $stmt->fetch();
-// $stmt->close();
-
-// $total_price = $price * $quantity;
-
-// $stmt = $conn->prepare("INSERT INTO transactions_table (customer_id, product_id, quantity, purchase_date, total_price) VALUES (?,?,?,?,?)");
-// $stmt->bind_param("iiisd", $customer_id, $product_id, $quantity, $date, $total_price);
-
-// if ($stmt->execute()) {
-//   echo "Transaction recorded successfully.";
-// } else {
-//   echo "Error inserting transaction: " . $stmt->error;
-// }
-// $stmt->close();
-
-//   $conn->close();
-// }
-
-//
-// <script>
-//   document.querySelector('form').addEventListener('submit', function (e) {
-//     // Close the modal after form submission
-//     const modal = bootstrap.Modal.getInstance(document.getElementById('addCustomer'));
-//     modal.hide();
-//   });
-// </script>
