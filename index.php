@@ -77,7 +77,15 @@ if ($conn){
         class='edit-button btn' 
         onclick = 'edit(); ' 
         data-bs-toggle ='modal'
-        data-bs-target ='#staticBackDrop' >Edit</button> </td>";
+        data-bs-target ='#staticBackDrop' >Edit</button>
+        <button
+
+        type = 'button'
+        class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal'
+        >Delete</button>
+        
+
+        </td>";
       }
     }else {
       echo "<tr> <td colspan = '6'>No data found </td> </tr>";
@@ -91,9 +99,11 @@ if ($conn){
           
         </tbody>
     </table>
+
 <?php
 include "addFunction.php";
 ?>
+  <?php include "deleteFunction.php";?>  
 <!-- jQuery -->
 </script>
 <script src="lib/jquery/jquery-3.7.1.min.js"></script>
