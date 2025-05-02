@@ -8,7 +8,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "POST">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "POST">
           <div class="row align-items-center p-2">
           <label class = "col-4 col-form-label" for = "customer_name" >Customer name: </label> 
           <div class="col-8">
@@ -57,12 +57,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit user information</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add user information</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post">
-
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "post">
+          <input type = "hidden" name = "form_type" value = "add_customer">
            <!-- Customer Info -->
 
           <div class="row align-items-center p-2">
@@ -160,7 +160,10 @@
 
 
 <?php 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST['form_type'] == "add_customer"){
   $customer_name = $_POST['add_name'];//
   $customer_address = $_POST['add_address'];//
   $customer_contactNumber = $_POST['add_contact_number'];//
@@ -172,77 +175,58 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   $quantity = $_POST['add_quantity'];
   $date = $_POST['add_date'];
   
+
+  $customer_id = null;
+
+  $conn->begin_transaction();
 //EDIT NALANG UNG SA PRODUCT TAS KUNIN UNG PRICE SHIT SA
 // customer ID makukuha na through ->insert_i, ung product_id naman ganon din
-$query = "SELECT supplier_id, price FROM product_table";
- $result = $conn->query($query);
 
-//  if($result->num_rows>0){
-//   while($row = $result->fetch_assoc()){
-//     if($brand_id == $row['supplier_id']){
-//       $total_price = $row['price'] * $quantity;
-//       break;
-//     }
-//   }
-//  }
-
-
-
-$query = "SELECT supplier_name, supplier_id FROM suppliers_table";
-$result = $conn->query($query);
-
-if($result->num_rows>0){
-  while($row = $result->fetch_assoc()){
-    if($supplier_id == $row['supplier_id']){
-      $supplier_name = $row['supplier_name']; // PANG PROMPT LANG
-      break;
-    }
-  }
-}
-
-
-  // Prepare and bind
+try {
+  //FIRST PROCESS
   $stmt = $conn->prepare("INSERT INTO customer_table (customer_name, address, contact_number, isle_number, shelf) VALUES (?, ?, ?, ?, ?)");
   $stmt->bind_param("sssii", $customer_name, $customer_address, $customer_contactNumber, $customer_isle, $customer_shelf);
+  
+  if($stmt->execute()){
+    $customer_id = $stmt->insert_id;
 
-  // Execute the statement
-  if ($stmt->execute()) {
-    $customer_id = $stmt->insert_id; // Get the last inserted customer ID
-      echo "New record created successfully";
-      $stmt->close();
-  } else {
-      echo "Error: " . $stmt->error;
+
+    $stmt = $conn->prepare("SELECT price FROM product_table WHERE product_id = ?");
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $stmt->bind_result($price);
+    $stmt->fetch();
+    $stmt->close();
+
+    $total_price = $price * $quantity;
+
+    // $formatted_date = date('Y-m-d H:i:s', strtotime($date));
+
+    $stmt = $conn->prepare("INSERT INTO transactions_table (customer_id, product_id, quantity, total_price, purchase_date) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("iiids", $customer_id, $product_id, $quantity, $total_price, $date);
+
+    if(!$stmt->execute()){
+      throw new Exception("Error inserting transaction: " . $stmt->error);
+    }
+    $stmt->close();
+
+    $conn->commit();
+
+    echo"<div class = 'alert alert-success'>Customer and transaction added successfully! </div>";
+    $_SESSION['success_message'] = "Customer and transaction added successfully!";
+
+    echo"<script>setTimeout(function(){
+    window.location.href = '" . htmlspecialchars($_SERVER["PHP_SELF"]) . "';
+    }, 1000);
+     </script>";
+
+  }else {
+    throw new Exception("Error inserting customer: " . $stmt->error);
   }
-  $stmt->close();
-  $stmt = $conn->prepare("");
 
-$stmt = $conn->prepare("SELECT price FROM product_table WHERE product_id = ?");
-$stmt->bind_param("i", $product_id);
-$stmt->execute();
-$stmt->bind_result($price);
-$stmt->fetch();
-$stmt->close();
-
-$total_price = $price * $quantity;
-
-$stmt = $conn->prepare("INSERT INTO transactions_table (customer_id, product_id, quantity, purchase_date, total_price) VALUES (?,?,?,?,?)");
-$stmt->bind_param("iiisd", $customer_id, $product_id, $quantity, $date, $total_price);
-
-if ($stmt->execute()) {
-  echo "Transaction recorded successfully.";
-} else {
-  echo "Error inserting transaction: " . $stmt->error;
+}catch (Exception $e){
+  $conn->rollback();
+  echo "<div class = 'alert alert-danger'>Error: " . $e->getMessage() . "</div>";
 }
-$stmt->close();
-
-  $conn->close();
 }
-
 ?>
-<script>
-  document.querySelector('form').addEventListener('submit', function (e) {
-    // Close the modal after form submission
-    const modal = bootstrap.Modal.getInstance(document.getElementById('addCustomer'));
-    modal.hide();
-  });
-</script>

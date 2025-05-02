@@ -26,7 +26,7 @@ CREATE TABLE `transactions_table` (
   `product_id` int,
   `quantity` int,
   `total_price` decimal,
-  `purchase_date` datetime
+  `purchase_date` date
 );
 
 CREATE TABLE `stock_table` (
