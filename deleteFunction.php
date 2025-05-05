@@ -1,3 +1,22 @@
+<?php
+$host = 'localhost';
+$username =  'root';
+$password = '';
+$database = 'new-ims';
+$conn = ''; 
+
+try{
+  $conn = new mysqli($host, $username, $password, $database);
+
+}catch(mysqli_sql_exception){
+  echo"Could not connect to the database";
+}
+if ($conn){
+  echo "Connected";
+}
+?>
+
+
 <?php 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['customer_id'])){
@@ -16,7 +35,6 @@ if(isset($conn)){
   $stmt->execute();
   $stmt->close();
 
-  echo"D ata na delete";
   echo "<script>window.location.href = window.location.href; </script>";
   exit();
 }else {

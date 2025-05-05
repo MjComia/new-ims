@@ -77,7 +77,13 @@ if ($conn){
         class='edit-button btn' 
         onclick = 'edit(); ' 
         data-bs-toggle ='modal'
-        data-bs-target ='#staticBackDrop' >Edit</button>
+        data-bs-target ='#editModal' 
+        data-customer-id = '" .htmlspecialchars($row['customer_id']) . "'
+        data-address='" . htmlspecialchars($row['address']) . "' 
+        data-contact='" . htmlspecialchars($row['contact_number']) . "' 
+        data-isle='" . htmlspecialchars($row['isle_number']) . "' 
+        data-shelf='" . htmlspecialchars($row['shelf']) . "'
+        >Edit</button>
 
         <button
         type = 'button'
@@ -93,7 +99,7 @@ if ($conn){
     }else {
       echo "<tr> <td colspan = '6'>No data found </td> </tr>";
     }
-
+$conn->close();
 ?>
   </div>  
  </div> 
@@ -102,10 +108,11 @@ if ($conn){
           
         </tbody>
     </table>
+
+<?php include "editCustomerFunction.php"; ?>
 <?php include "deleteFunction.php";?>  
-<?php
-include "addFunction.php";
-?>
+<?php include "addFunction.php"; ?>
+
 
 <!-- jQuery -->
 </script>
@@ -115,11 +122,54 @@ include "addFunction.php";
 
 
 <script>
-document.getElementById('deleteModal').addEventListener('show.bs.modal', function(event){
-const button = event.relatedTarget; // Button that triggered the modal
-const customerId = button.getAttribute('data-customer-id'); // Extract info from data-* attributes
-document.getElementById('deleteCustomerId').value = customerId; // Update the modal's content
+document.addEventListener('DOMContentLoaded', function () {
 
+// DELETE Modal logic
+document.getElementById('deleteModal').addEventListener('show.bs.modal', function(event){
+  const button = event.relatedTarget;
+  const customerId = button.getAttribute('data-customer-id');
+  document.getElementById('deleteCustomerId').value = customerId; //ung deleteCustomerId sa deleteFunction.php
+});
+
+// // EDIT Modal logic
+// document.getElementById('editModal').addEventListener('show.bs.modal', function(event){
+//   const button = event.relatedTarget;
+//   const editCustomerId = button.getAttribute('data-customer-id');
+//   document.getElementById('editCustomer').value = editCustomerId;
+// });
+
+
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Edit Modal logic
+  document.getElementById('editModal').addEventListener('show.bs.modal', function(event) {
+    const button = event.relatedTarget;
+    
+    // Get data attributes from the clicked button
+    const customerId = button.getAttribute('data-customer-id');
+    const address = button.getAttribute('data-address');
+    const contact = button.getAttribute('data-contact');
+    const isle = button.getAttribute('data-isle');
+    const shelf = button.getAttribute('data-shelf');
+    
+
+        
+    console.log("Edit button clicked for customer ID:", customerId);
+    console.log("Address:", address);
+    console.log("Contact:", contact);
+    console.log("Isle:", isle);
+    console.log("Shelf:", shelf);
+
+    // Set values to form fields
+    document.getElementById('editCustomer').value = customerId;
+    document.getElementById('customer_address').value = address || '';
+    document.getElementById('customer_contactNumber').value = contact || '';
+    document.getElementById('customer_isle').value = isle || '';
+    document.getElementById('customer_shelf').value = shelf || '';
+  });
 });
 </script>
 <script>
@@ -129,5 +179,5 @@ document.getElementById('deleteCustomerId').value = customerId; // Update the mo
   });
 </script>
 <?php include "footer.php"; 
-    $conn->close();
+    
 ?>
