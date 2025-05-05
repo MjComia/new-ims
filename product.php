@@ -16,7 +16,7 @@ try{
   echo"Could not connect to the database";
 }
 if ($conn){
-  echo "Connected";
+  // echo "Connected";
 }
 ?>
 

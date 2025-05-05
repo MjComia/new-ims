@@ -1,6 +1,6 @@
 <?php
 // This file should be included at the top of index.php to help debug database issues
-echo "HELLLOOO";
+
 // Function to check table structure
 function checkTableStructure($conn, $tableName) {
     $result = $conn->query("DESCRIBE $tableName");

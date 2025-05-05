@@ -12,7 +12,7 @@ try{
   echo"Could not connect to the database";
 }
 if ($conn){
-  echo "Connected EDIT";
+  // echo "Connected EDIT";
 }
 ?>
 
