@@ -78,10 +78,13 @@ if ($conn){
         onclick = 'edit(); ' 
         data-bs-toggle ='modal'
         data-bs-target ='#staticBackDrop' >Edit</button>
-        <button
 
+        <button
         type = 'button'
-        class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteModal'
+        class='btn btn-danger' 
+        data-bs-toggle='modal' 
+        data-bs-target='#deleteModal'
+        data-customer-id = '" .htmlspecialchars($row['customer_id']) . "'
         >Delete</button>
         
 
@@ -99,17 +102,26 @@ if ($conn){
           
         </tbody>
     </table>
-
+<?php include "deleteFunction.php";?>  
 <?php
 include "addFunction.php";
 ?>
-  <?php include "deleteFunction.php";?>  
+
 <!-- jQuery -->
 </script>
 <script src="lib/jquery/jquery-3.7.1.min.js"></script>
 <!-- DataTables -->
 <script src="lib/datatables/dataTables.js"></script>
 
+
+<script>
+document.getElementById('deleteModal').addEventListener('show.bs.modal', function(event){
+const button = event.relatedTarget; // Button that triggered the modal
+const customerId = button.getAttribute('data-customer-id'); // Extract info from data-* attributes
+document.getElementById('deleteCustomerId').value = customerId; // Update the modal's content
+
+});
+</script>
 <script>
   $(document).ready(function () {
     $('#myTable').DataTable(); // Activate DataTable
