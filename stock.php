@@ -25,6 +25,7 @@ if ($conn){
 <table id="myTable" class="display">
         <thead>
             <tr>
+                <th>Stock ID</th>
                 <th>Product ID</th>
                 <th>Stock Quantity</th>
 
@@ -33,11 +34,12 @@ if ($conn){
         </thead>
         <tbody>
 <?php 
-    $query = "SELECT product_id, stock_quantity FROM stock_table";
+    $query = "SELECT product_id, stock_quantity, stock_id FROM stock_table";
     $result = $conn->query($query);
     if($result->num_rows > 0 ){
       while($row = $result->fetch_assoc()){
         echo "<tr>";
+        echo "<td>" .  htmlspecialchars($row['stock_id']). "</td>";
         echo "<td>" .  htmlspecialchars($row['product_id']). "</td>";
         echo "<td>" .  htmlspecialchars($row['stock_quantity']). "</td>";
       }

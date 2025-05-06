@@ -1,6 +1,5 @@
 <?php 
-
-include "db-debug.php"; // Include the database connection file for debugging
+// include "db-debug.php"; // Include the database connection file for debugging
 include "header.php";
 include "navbar.php";
 

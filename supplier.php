@@ -39,7 +39,7 @@ if ($conn){
       <div class="col-1"></div>      
       <button class = "col-1"
               data-bs-toggle ='modal'
-              data-bs-target ='#addCustomer' >Add</button>
+              data-bs-target ='#addSupplier' >Add</button>
     </div>
 <table id="myTable" class="display">
         <thead>
@@ -73,7 +73,9 @@ if ($conn){
   </div>
 </div>
 
-
+<?php 
+include "functions/addSupplier.php";
+?>
 
 <!-- jQuery -->
 <script src="lib/jquery/jquery-3.7.1.min.js"></script>

@@ -22,7 +22,26 @@ if ($conn){
 
 <!-- DataTables -->
 
-<table id="myTable" class="display">
+<div class="card">
+  <div class="card-body">
+    <div class = "card-header">Inventory</div>
+       <div class="row">
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>      
+      <button class = "col-1"
+              data-bs-toggle ='modal'
+              data-bs-target ='#addProduct'>Add</button>
+    </div>
+  <table id="myTable" class="display">
         <thead>
             <tr>
                 <th>Product ID</th>
@@ -54,7 +73,13 @@ if ($conn){
           
         </tbody>
     </table>
+  
+  </div>
+</div>
 
+<?php
+include "functions/addProduct.php";
+?>
 
 <!-- jQuery -->
 <script src="lib/jquery/jquery-3.7.1.min.js"></script>
