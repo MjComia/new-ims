@@ -69,7 +69,22 @@ if ($conn){
         echo "<td>" .  htmlspecialchars($row['contact_number']). "</td>";
         echo "<td>" .  htmlspecialchars($row['isle_number']) . "</td>";
         echo "<td>" .  htmlspecialchars($row['shelf']). "</td>";
-        echo "<td> <button 
+        echo "<td>
+        
+        <form action = 'generate.php' method = 'POST' target = '_blank'>
+        <input type = 'hidden' name = 'customer_id' value = '".htmlspecialchars($row['customer_id'])."'> 
+        <input type = 'hidden' name = 'customer_name' value = '".htmlspecialchars($row['customer_name'])."'> 
+        <input type = 'hidden' name = 'customer_address' value = '".htmlspecialchars($row['address'])."'> 
+        <input type = 'hidden' name = 'contact_number' value = '".htmlspecialchars($row['contact_number'])."'> 
+        <input type = 'hidden' name = 'isle_number' value = '".htmlspecialchars($row['isle_number'])."'> 
+        <input type = 'hidden' name = 'shelf_number' value = '".htmlspecialchars($row['shelf'])."'> 
+
+        
+     
+
+
+        
+        <button 
         type = 'button'
         class='edit-button btn' 
         onclick = 'edit(); ' 
@@ -90,7 +105,12 @@ if ($conn){
         data-customer-id = '" .htmlspecialchars($row['customer_id']) . "'
         >Delete</button>
         
-
+        <button
+        type = 'submit'
+          class='btn btn-secondary'
+        >
+        PDF
+        </button>   </form>
         </td>";
       }
     }else {
