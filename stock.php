@@ -22,6 +22,9 @@ if ($conn){
 
 <!-- DataTables -->
 
+<div class="card border-2">
+  <div class="card-body">
+    <div class="card-header">Inventory</div>
 <table id="myTable" class="display">
         <thead>
             <tr>
@@ -51,6 +54,10 @@ if ($conn){
           
         </tbody>
     </table>
+  </div>
+</div>
+
+
 
 
 <!-- jQuery -->
