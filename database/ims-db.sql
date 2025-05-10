@@ -228,3 +228,27 @@ UPDATE product_table SET price = 159000 WHERE product_id = 106;
 UPDATE product_table SET price = 300000 WHERE product_id = 107;
 UPDATE product_table SET price = 158000 WHERE product_id = 108;
 UPDATE product_table SET price = 219800 WHERE product_id = 109;
+
+
+-- Drop old table if it exists
+DROP TABLE IF EXISTS `stock_table`;
+
+-- Recreate the stock_table
+CREATE TABLE `stock_table` (
+  `stock_id` INT PRIMARY KEY AUTO_INCREMENT,
+  `product_id` INT,
+  `stock_quantity` INT,
+  FOREIGN KEY (`product_id`) REFERENCES `product_table`(`product_id`)
+);
+
+-- Insert your predefined data
+INSERT INTO `stock_table` (`product_id`, `stock_quantity`) VALUES
+(101, 15),
+(102, 12),
+(103, 8),
+(104, 10),
+(105, 7),
+(106, 5),
+(107, 3),
+(108, 4),
+(109, 2);

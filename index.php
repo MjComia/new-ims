@@ -37,7 +37,9 @@ if ($conn){
       <div class="col-1"></div>
       <div class="col-1"></div>
       <div class="col-1"></div>
-      <div class="col-1"></div>      
+      <div class="col-1">
+        <a href = "functions/exportExcel.php" class = "btn btn-success"><i class = "dwn">Export to Excel</i></a>
+      </div>      
       <button class = "col-1"
               data-bs-toggle ='modal'
               data-bs-target ='#addCustomer' >Add</button>
@@ -111,7 +113,8 @@ if ($conn){
           class='btn btn-secondary'
         >
         PDF
-        </button>   </form>
+        </button>   
+        </form>
         </td>";
       }
     }else {
