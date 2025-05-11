@@ -54,6 +54,7 @@ if ($conn){
                 <th>Isle Number</th>
                 <th>Shelf Number</th>
                 <th>Actions</th>
+                <th>Status</th>
                 
             </tr>
             
@@ -115,6 +116,9 @@ if ($conn){
         PDF
         </button>   
         </form>
+        </td>";
+        echo"<td>
+        <button onclick = 'inOut(this)'class = 'btn btn-success buttonInOut'>Active</button>
         </td>";
       }
     }else {
@@ -192,6 +196,22 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('customer_shelf').value = shelf || '';
   });
 });
+</script>
+
+<script>
+function inOut(button){
+
+  if(button.innerText === 'Active'){
+    button.innerText = 'Inactive';
+    button.classList.remove('btn-success');
+    button.classList.add('btn-danger');
+  }else{
+    button.innerText = 'Active';
+    button.classList.remove('btn-danger');
+    button.classList.add('btn-success');
+  }
+}
+
 </script>
 <script>
   $(document).ready(function () {

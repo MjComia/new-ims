@@ -16,25 +16,23 @@ if ($conn){
 }
 
 header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="product_data.csv"');
+header('Content-Disposition: attachment; filename="stock_data.csv"');
 
 // Open output stream
 $output = fopen("php://output", "w");
 
 // Write CSV column headers
-fputcsv($output, ['Product ID', 'Brand Model', 'Price', 'Supplier ID', 'Sales']);
+fputcsv($output, ['Stock ID', 'Product ID', 'Stock Quantity']);
 
 
-$query = "SELECT * FROM product_table";
+$query = "SELECT * FROM stock_table";
 $result = $conn->query($query);
 // Write each row to CSV
 while ($row = $result->fetch_assoc()) {
     fputcsv($output, [
+        $row['stock_id'],
         $row['product_id'],
-        $row['brand_model'],
-        $row['price'],
-        $row['supplier_id'],
-        $row['sales'],
+        $row['stock_quantity'],
     ]);
 }
 

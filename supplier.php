@@ -36,7 +36,9 @@ if ($conn){
       <div class="col-1"></div>
       <div class="col-1"></div>
       <div class="col-1"></div>
-      <div class="col-1"></div>      
+      <div class="col-1">
+                <a href = "functions/excelSupplier.php" class = "btn btn-success"><i class = "dwn">Export to Excel</i></a>
+      </div>      
       <button class = "col-1"
               data-bs-toggle ='modal'
               data-bs-target ='#addSupplier' >Add</button>

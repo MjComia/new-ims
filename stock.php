@@ -25,6 +25,22 @@ if ($conn){
 <div class="card border-2">
   <div class="card-body">
     <div class="card-header">Inventory</div>
+        <div class="row">
+
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1">
+                <a href = "functions/excelStock.php" class = "btn btn-success"><i class = "dwn">Export to Excel</i></a>
+      </div>
 <table id="myTable" class="display">
         <thead>
             <tr>
