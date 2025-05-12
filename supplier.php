@@ -23,25 +23,12 @@ if ($conn){
 <!-- DataTables -->
 <div class="card border-2"> 
   <div class="card-body">
-  <div class="card-header">Inventory</div>
-    <div class="row">
-
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1"></div>
-      <div class="col-1">
-                <a href = "functions/excelSupplier.php" class = "btn btn-success"><i class = "dwn">Export to Excel</i></a>
-      </div>      
-      <button class = "col-1"
-              data-bs-toggle ='modal'
-              data-bs-target ='#addSupplier' >Add</button>
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+      <span>Supplier List</span>
+      <div class="d-flex gap-2">
+        <a href="functions/exportExcel.php" class="btn btn-success btn-sm">Export to Excel</a>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCustomer">Add</button>
+      </div>
     </div>
 <table id="myTable" class="display">
         <thead>

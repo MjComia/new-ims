@@ -1,4 +1,5 @@
 body {
+    width: 100%;
     background-color: #f8f9fa;
     font-family: 'Poppins', sans-serif;
   }
@@ -25,8 +26,8 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 1.2rem;
   color: #0B0B45;
-  margin: 5px 0 5px 0;
-  text-align: center;
+  
+  text-align:left;
   font-weight: 600;
 }
 
@@ -82,12 +83,34 @@ body {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,1%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   }
 
-  
+  /*--- testing ----*/
+  .card{
+    background-color: ;
+ 
+  }
+
+  .card-body{
+    border: 10px;
+    overflow: auto;
+    background-color: ;
+  }
+  .custom-button-row {
+    margin-top: 10px;
+  }
+
+  .custom-button-row .btn {
+    min-width: 110px;
+    font-size: 0.85rem;
+  }
+
+
   /* TABLE */
   #myTable {
     width: 100%;
     border-collapse: collapse;
     font-family: 'Poppins', sans-serif;
+    background-color: ;
+    overflow: auto;
   }
 
   #myTable thead {
@@ -121,8 +144,25 @@ body {
     border: 1px solid #ccc;
   }
 
-  .table-responsive {
-    width: 100%;
-    overflow-x: auto;
+
+  /*------- Table Scrollbar ------*/
+
+  /*------- Media queries ------*/
+  @media (max-width: 600px){
+    .logo {
+    font-size: 1.2rem;
+    }
+
+    .card-header{
+      font-size: 1rem;
+    }
+
+    .navbar-brand {
+    font-size: 1rem;
+    }
+
+
+
+
   }
-  
+
