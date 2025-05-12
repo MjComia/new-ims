@@ -21,6 +21,9 @@
         <li class="nav-item">
           <a class="nav-link text-light" href="stock.php">Stock</a>
         </li>
+              <li class="nav-item">
+          <a class="nav-link text-light" href="charts.php">Charts</a>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li> -->

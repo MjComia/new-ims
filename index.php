@@ -55,6 +55,7 @@ if ($conn){
                 <th>Shelf Number</th>
                 <th>Actions</th>
                 <th>Status</th>
+                <th>Date Sent</th>
                 
             </tr>
             
@@ -62,7 +63,7 @@ if ($conn){
         <tbody>
 
 <?php 
-    $query = "SELECT customer_id, customer_name, address, contact_number, isle_number, shelf FROM customer_table";
+    $query = "SELECT customer_id, customer_name, address, contact_number, isle_number, shelf, is_sent, sent_date FROM customer_table";
     $result = $conn->query($query);
     if($result->num_rows > 0 ){
       while($row = $result->fetch_assoc()){
@@ -118,8 +119,14 @@ if ($conn){
         </form>
         </td>";
         echo"<td>
-        <button onclick = 'inOut(this)'class = 'btn btn-success buttonInOut'>Active</button>
+            <form action = 'send_customer.php' method = 'POST'>
+            <input type = 'hidden' name = 'customer_id' value = '". htmlspecialchars($row['customer_id'])."'>
+            <button type = 'submit' class = 'btn btn-success' ". ($row['is_sent'] ? "disabled" : "") .">
+            ".($row['is_sent'] ? "Sent" : "Send")."
+            </button>
+            </form>
         </td>";
+      echo "<td>" . htmlspecialchars($row['sent_date']) . "</td>";
       }
     }else {
       echo "<tr> <td colspan = '6'>No data found </td> </tr>";
