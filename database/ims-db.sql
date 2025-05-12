@@ -252,3 +252,8 @@ INSERT INTO `stock_table` (`product_id`, `stock_quantity`) VALUES
 (107, 3),
 (108, 4),
 (109, 2);
+
+
+ALTER TABLE customer_table
+ADD COLUMN is_sent TINYINT(1) DEFAULT 0,
+ADD COLUMN sent_date DATE DEFAULT NULL;
