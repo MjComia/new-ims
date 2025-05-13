@@ -26,12 +26,22 @@ if ($conn){
  <div class="card border-2">
   <div class="card-body">
       <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-      <span>Customer List</span>
-      <div class="d-flex gap-2">
-        <a href="functions/exportExcel.php" class="btn btn-success btn-sm">Export to Excel</a>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCustomer">Add</button>
+        <span>Customer List</span>
+        <div class="d-flex gap-2">
+          <a href="functions/exportExcel.php" class="btn btn-success btn-sm">
+            <i class="fas fa-file-excel"></i> <!-- Optional icon -->
+            Export to Excel
+          </a>
+          <button 
+              class="btn btn-sm custom-add-button" 
+              data-bs-toggle="modal" 
+              data-bs-target="#addCustomer"
+            >
+              <i class="fas fa-plus"></i> 
+          </button>
+        </div>
       </div>
-    </div>
+
 <table id="myTable" class="display">
         <thead>
             <tr>
@@ -79,7 +89,7 @@ if ($conn){
         
         <button 
         type = 'button'
-        class='edit-button btn' 
+        class='edit-button btn custom-edit-button me-1'  
         onclick = 'edit(); ' 
         data-bs-toggle ='modal'
         data-bs-target ='#editModal' 
@@ -88,21 +98,25 @@ if ($conn){
         data-contact='" . htmlspecialchars($row['contact_number']) . "' 
         data-isle='" . htmlspecialchars($row['isle_number']) . "' 
         data-shelf='" . htmlspecialchars($row['shelf']) . "'
-        >Edit</button>
+        >
+        <i class='fas fa-edit'></i>
+        </button>
 
         <button
         type = 'button'
-        class='btn btn-danger' 
+        class='btn btn-danger me-1' 
         data-bs-toggle='modal' 
         data-bs-target='#deleteModal'
         data-customer-id = '" .htmlspecialchars($row['customer_id']) . "'
-        >Delete</button>
+        >
+         <i class='fas fa-trash'></i>
+        </button>
         
         <button
         type = 'submit'
           class='btn btn-secondary'
         >
-        PDF
+         <i class='fas fa-file-pdf'></i>
         </button>   
         </form>
         </td>";

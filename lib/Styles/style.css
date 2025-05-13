@@ -34,6 +34,7 @@ body {
   .navbar {
     background-color: #0B0B45 !important; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
   }
 
   .navbar-brand {
@@ -43,7 +44,7 @@ body {
     color: #ffffff !important; /* White text */
     
   }
-
+ 
   .nav-link {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
@@ -84,16 +85,18 @@ body {
   }
 
   /*--- testing ----*/
-  .card{
-    background-color: ;
- 
-  }
 
   .card-body{
     border: 10px;
     overflow: auto;
-    background-color: ;
   }
+
+   /*--- buttons ----*/
+  .custom-add-button{
+  background-color: #0B0B45 !important;
+  color: white !important;
+  }
+
   .custom-button-row {
     margin-top: 10px;
   }
@@ -101,6 +104,18 @@ body {
   .custom-button-row .btn {
     min-width: 110px;
     font-size: 0.85rem;
+    background-color: #0B0B45 !important;
+  }
+
+  .custom-edit-button {
+  background-color: #0B0B45;
+  color: white;
+  }
+
+  .custom-edit-button:hover {
+  background-color: #1a1a80; /* slightly lighter blue */
+  color: #fff; /* keep text white or change if desired */
+  cursor: pointer;
   }
 
 
@@ -109,7 +124,6 @@ body {
     width: 100%;
     border-collapse: collapse;
     font-family: 'Poppins', sans-serif;
-    background-color: ;
     overflow: auto;
   }
 
@@ -146,6 +160,9 @@ body {
 
 
   /*------- Table Scrollbar ------*/
+  .dt-layout-cell{
+    overflow: auto;
+  }
 
   /*------- Media queries ------*/
   @media (max-width: 600px){
@@ -160,9 +177,10 @@ body {
     .navbar-brand {
     font-size: 1rem;
     }
-
-
-
+    #myTable th,
+    #myTable td {
+      font-size: small;
+    }
 
   }
 

@@ -24,13 +24,23 @@ if ($conn){
 
 <div class="card">
   <div class="card-body">
-      <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-      <span>Product List</span>
-      <div class="d-flex gap-2">
-        <a href="functions/exportExcel.php" class="btn btn-success btn-sm">Export to Excel</a>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCustomer">Add</button>
-      </div>
-    </div>
+<div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+  <span>Product List</span>
+  <div class="d-flex gap-2">
+    <a href="functions/excelProduct.php" class="btn btn-success btn-sm">
+      <i class="fas fa-file-excel"></i>
+      Export to Excel
+    </a>
+    <button 
+      class="btn btn-sm custom-add-button" 
+      data-bs-toggle="modal" 
+      data-bs-target="#addProduct"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+</div>
+
   <table id="myTable" class="display">
         <thead>
             <tr>

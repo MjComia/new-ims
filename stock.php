@@ -27,9 +27,13 @@ if ($conn){
     <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
       <span>Stock List</span>
       <div class="d-flex gap-2">
-        <a href="functions/exportExcel.php" class="btn btn-success btn-sm">Export to Excel</a>
+        <a href="functions/excelStock.php" class="btn btn-success btn-sm">
+          <i class="fas fa-file-excel"></i>
+          Export to Excel
+        </a>
       </div>
     </div>
+
 <table id="myTable" class="display">
         <thead>
             <tr>

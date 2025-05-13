@@ -519,6 +519,7 @@
   div.dt-container div.dt-layout-row div.dt-layout-cell.dt-layout-end {
     justify-content: flex-end;
     margin-left: auto;
+    
   }
   div.dt-container div.dt-layout-row div.dt-layout-cell:empty {
     display: none;

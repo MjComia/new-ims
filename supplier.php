@@ -26,10 +26,20 @@ if ($conn){
     <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
       <span>Supplier List</span>
       <div class="d-flex gap-2">
-        <a href="functions/exportExcel.php" class="btn btn-success btn-sm">Export to Excel</a>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCustomer">Add</button>
+        <a href="functions/excelSupplier.php" class="btn btn-success btn-sm">
+          <i class="fas fa-file-excel"></i>
+          Export to Excel
+        </a>
+        <button 
+          class="btn btn-sm custom-add-button" 
+          data-bs-toggle="modal" 
+          data-bs-target="#addSupplier"
+        >
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
     </div>
+
 <table id="myTable" class="display">
         <thead>
             <tr>
