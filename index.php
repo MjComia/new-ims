@@ -87,37 +87,40 @@ if ($conn){
 
 
         
-        <button 
-        type = 'button'
-        class='edit-button btn custom-edit-button me-1'  
-        onclick = 'edit(); ' 
-        data-bs-toggle ='modal'
-        data-bs-target ='#editModal' 
-        data-customer-id = '" .htmlspecialchars($row['customer_id']) . "'
-        data-address='" . htmlspecialchars($row['address']) . "' 
-        data-contact='" . htmlspecialchars($row['contact_number']) . "' 
-        data-isle='" . htmlspecialchars($row['isle_number']) . "' 
-        data-shelf='" . htmlspecialchars($row['shelf']) . "'
-        >
-        <i class='fas fa-edit'></i>
-        </button>
+        <div class='button-group'>
+          <button 
+            type='button'
+            class='edit-button btn custom-edit-button'  
+            onclick='edit();' 
+            data-bs-toggle='modal'
+            data-bs-target='#editModal' 
+            data-customer-id='" . htmlspecialchars($row['customer_id']) . "'
+            data-address='" . htmlspecialchars($row['address']) . "' 
+            data-contact='" . htmlspecialchars($row['contact_number']) . "' 
+            data-isle='" . htmlspecialchars($row['isle_number']) . "' 
+            data-shelf='" . htmlspecialchars($row['shelf']) . "'
+          >
+            <i class='fas fa-edit'></i>
+          </button>
 
-        <button
-        type = 'button'
-        class='btn btn-danger me-1' 
-        data-bs-toggle='modal' 
-        data-bs-target='#deleteModal'
-        data-customer-id = '" .htmlspecialchars($row['customer_id']) . "'
-        >
-         <i class='fas fa-trash'></i>
-        </button>
-        
-        <button
-        type = 'submit'
-          class='btn btn-secondary'
-        >
-         <i class='fas fa-file-pdf'></i>
-        </button>   
+          <button
+            type='button'
+            class='btn btn-danger' 
+            data-bs-toggle='modal' 
+            data-bs-target='#deleteModal'
+            data-customer-id='" . htmlspecialchars($row['customer_id']) . "'
+          >
+            <i class='fas fa-trash'></i>
+          </button>
+          
+          <button
+            type='submit'
+            class='btn btn-secondary'
+          >
+            <i class='fas fa-file-pdf'></i>
+          </button>   
+        </div>  
+
         </form>
         </td>";
         echo"<td>
